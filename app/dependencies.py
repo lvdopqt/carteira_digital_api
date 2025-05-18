@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from typing import Callable
 
 from app.db.session import get_db
-# Importe o UserRepository e o UserService
+
 from app.repos.user import UserRepository
 from app.services.user import UserService
 

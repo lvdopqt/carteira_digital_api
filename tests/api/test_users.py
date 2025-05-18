@@ -4,9 +4,9 @@ from sqlalchemy.orm import Session
 
 from app.schemas.user import UserCreate, User as UserResponseSchema
 from app.models.user import User as UserModel
-from app.core.hashing import verify_password # Import verify_password
+from app.core.hashing import verify_password
 
-def test_create_user_successful(client: TestClient, db: Session): # Added db: Session dependency back for verification
+def test_create_user_successful(client: TestClient, db: Session):
     """
     Test creating a new user successfully via the API endpoint.
     """

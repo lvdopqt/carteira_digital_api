@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from app.schemas.user import UserCreate, User as UserResponseSchema
 
 from app.dependencies import get_user_service_dependency
-from app.services.user import UserService # Import UserService
+from app.services.user import UserService
 
 router = APIRouter(tags=["Users"])
 

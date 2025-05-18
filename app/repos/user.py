@@ -1,8 +1,8 @@
 from sqlalchemy.orm import Session
 from typing import List, Optional
 
-from app.models.user import User as UserModel # Import the User ORM model
-from app.schemas.user import UserCreate # Import the creation schema
+from app.models.user import User as UserModel
+from app.schemas.user import UserCreate
 
 class UserRepository:
     """
@@ -33,7 +33,6 @@ class UserRepository:
 
         return db_user
 
-    # Add methods for find_or_create_oauth_user, update, delete, etc., if needed
     def find_or_create_oauth_user(self, email: str, full_name: Optional[str] = None, hashed_placeholder_password: str = "placeholder") -> UserModel:
         """
         Finds a user by email or creates a new one for OAuth login.
@@ -45,7 +44,7 @@ class UserRepository:
             # User doesn't exist, create a new one
             db_user = UserModel(
                 email=email,
-                hashed_password=hashed_placeholder_password, # Uses the provided placeholder hash
+                hashed_password=hashed_placeholder_password,
                 full_name=full_name,
                 is_active=True,
                 is_superuser=False,
