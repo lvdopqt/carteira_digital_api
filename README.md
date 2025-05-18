@@ -172,6 +172,23 @@ Para executar a suíte de testes Pytest:
 pytest
 ```
 
+### Automação com Makefile
+
+Utilize o `Makefile` na raiz do projeto para automatizar tarefas comuns como instalação de dependências, gerenciamento do banco de dados (via Docker Compose), execução de migrações e inicialização da API. Requer que `make`, Docker, Docker Compose, Python e as ferramentas do projeto (pip, alembic, uvicorn, pytest) estejam disponíveis no seu ambiente.
+
+Comandos Principais:
+
+* `make help`: Exibe a lista de comandos.
+* `make install`: Instala dependências (`pip install -r requirements.txt`).
+* `make db-up`: Inicia o banco de dados (Docker Compose).
+* `make db-down`: Para o banco de dados (Docker Compose).
+* `make migrate`: Executa migrações (requer `db-up`, `install`).
+* `make run`: Inicia a API (requer `migrate`, `install`).
+* `make test`: Roda testes (requer `install`).
+* `make clean`: Limpa arquivos de cache.
+
+Lembre-se de criar e configurar o arquivo `.env` manualmente.
+
 ## CI/CD com GitHub Actions
 
 O projeto inclui um workflow de CI configurado com GitHub Actions na pasta `.github/workflows/ci.yml`. Este workflow é disparado em pushes e pull requests para o branch `main`. Ele configura o ambiente Python, instala as dependências e executa os testes automaticamente, fornecendo feedback sobre a saúde do código.
