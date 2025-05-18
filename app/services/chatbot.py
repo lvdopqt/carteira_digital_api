@@ -1,19 +1,22 @@
-from app.schemas.chatbot import ChatbotRequest, ChatbotResponse # Importe os schemas
+from app.schemas.chatbot import ChatbotRequest, ChatbotResponse
 
 class ChatbotService:
+
+    RESPONSE_MAP = {
+        ("saldo", "transporte"): "Para consultar seu saldo de transporte, use o endpoint /api/v1/transport/balance.",
+        ("documento",): "Você pode gerenciar seus documentos digitais nos endpoints em /api/v1/documents.",
+        ("serviço", "prefeitura"): "Esta API simula alguns serviços da prefeitura. Quais serviços específicos você procura?",
+        ("olá", "oi", "ajuda"): "Olá! Como posso ajudar com sua carteira digital municipal?",
+    }
+    DEFAULT_RESPONSE = "Desculpe, não entendi sua pergunta. Posso ajudar com informações sobre saldo de transporte ou documentos digitais?"
+
     def get_chatbot_response(self, question: str) -> str:
         """
-        Retorna uma resposta pré-definida baseada na pergunta do usuário (lógica mockada).
+        Returns a predefined response based on the user's question using a dictionary for mapping keywords to responses.
         """
         question_lower = question.lower()
 
-        if "saldo" in question_lower or "transporte" in question_lower:
-            return "Para consultar seu saldo de transporte, use o endpoint /api/v1/transport/balance."
-        elif "documento" in question_lower:
-            return "Você pode gerenciar seus documentos digitais nos endpoints em /api/v1/documents."
-        elif "serviço" in question_lower or "prefeitura" in question_lower:
-             return "Esta API simula alguns serviços da prefeitura. Quais serviços específicos você procura?"
-        elif "olá" in question_lower or "oi" in question_lower or "ajuda" in question_lower:
-             return "Olá! Como posso ajudar com sua carteira digital municipal?"
-        else:
-            return "Desculpe, não entendi sua pergunta. Posso ajudar com informações sobre saldo de transporte ou documentos digitais?"
+        for keywords, response in self.RESPONSE_MAP.items():
+            if any(keyword in question_lower for keyword in keywords):
+                return response
+        return self.DEFAULT_RESPONSE

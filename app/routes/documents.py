@@ -27,7 +27,7 @@ def create_document_for_current_user(
     document_service: DocumentService = Depends(get_document_service)
 ):
     """
-    Armazena um novo documento digital para o usuário autenticado.
+    Stores a new digital document for the authenticated user.
     """
     new_document = document_service.create_document_for_user(document_data, current_user)
     return new_document
@@ -38,7 +38,7 @@ def list_documents_for_current_user(
     document_service: DocumentService = Depends(get_document_service)
 ):
     """
-    Lista todos os documentos digitais do usuário autenticado.
+    Lists all digital documents for the authenticated user.
     """
     documents = document_service.get_documents_by_user(current_user)
     return documents
@@ -51,7 +51,7 @@ def get_document_by_id(
     document_service: DocumentService = Depends(get_document_service)
 ):
     """
-    Obtém um documento digital específico do usuário autenticado pelo ID.
+    Gets a specific digital document for the authenticated user by ID.
     """
     document = document_service.get_user_document_by_id(document_id, current_user)
     return document

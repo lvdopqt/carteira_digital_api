@@ -9,7 +9,7 @@ class DocumentRepository:
         self.db = db
 
     def create_document(self, document_data: DocumentCreate, owner_id: int) -> DocumentModel:
-        """Cria um novo documento no banco de dados para um usuário."""
+        """Creates a new document in the database for a user."""
         # Cria uma instância do modelo ORM a partir dos dados do schema e do owner_id
         db_document = DocumentModel(
             title=document_data.title,
@@ -25,11 +25,11 @@ class DocumentRepository:
         return db_document
 
     def get_documents_by_owner(self, owner_id: int) -> List[DocumentModel]:
-        """Busca todos os documentos pertencentes a um usuário específico."""
+        """Retrieves all documents belonging to a specific user"""
         return self.db.query(DocumentModel).filter(DocumentModel.owner_id == owner_id).all()
 
     def get_document_by_id_and_owner(self, document_id: int, owner_id: int) -> Optional[DocumentModel]:
-        """Busca um documento pelo ID, garantindo que pertence ao usuário especificado."""
+        """Retrieves a document by ID, ensuring it belongs to the specified user."""
         return self.db.query(DocumentModel).filter(
             DocumentModel.id == document_id,
             DocumentModel.owner_id == owner_id

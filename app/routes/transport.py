@@ -17,7 +17,7 @@ def get_transport_balance(
     transport_service: TransportService = Depends(get_transport_service)
 ):
     """
-    Endpoint para consultar saldo do passe de transporte (mockado) do usuário autenticado.
+    Endpoint to query the authenticated user's transport pass balance (mocked).
     """
     balance = transport_service.get_balance(current_user)
     return {"balance": balance}
@@ -29,7 +29,7 @@ def recharge_transport_balance(
     transport_service: TransportService = Depends(get_transport_service)
 ):
     """
-    Endpoint para simular recarga do passe de transporte do usuário autenticado.
+    Endpoint to simulate topping up the authenticated user's transport pass.
     """
     new_balance = transport_service.recharge_balance(current_user, recharge_data.amount)
     return {"balance": new_balance}

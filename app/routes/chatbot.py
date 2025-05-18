@@ -14,7 +14,7 @@ def ask_chatbot(
     chatbot_service: ChatbotService = Depends(get_chatbot_service)
 ):
     """
-    Endpoint que recebe uma pergunta do usuário e retorna uma resposta pré-definida (simulação de um chatbot).
+    Endpoint that receives a user question and returns a predefined answer (chatbot simulation).
     """
     answer = chatbot_service.get_chatbot_response(query.question)
     return {"answer": answer}
