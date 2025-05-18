@@ -23,10 +23,8 @@ class UserRepository:
         """Creates a new user in the database."""
         db_user = UserModel(
             email=user_data.email,
-            hashed_password=hashed_password, # Receives the already hashed password from the service
+            hashed_password=hashed_password,
             full_name=user_data.full_name,
-            is_active=user_data.is_active,
-            is_superuser=user_data.is_superuser,
         )
 
         self.db.add(db_user)

@@ -13,9 +13,7 @@ def test_create_user_successful(client: TestClient, db: Session): # Added db: Se
     user_data = UserCreate(
         email="newuser@example.com",
         password="securepassword123",
-        full_name="New Test User",
-        is_active=True,
-        is_superuser=False,
+        full_name="New Test User"
     )
 
     response = client.post("/api/v1/users/", json=user_data.model_dump())
@@ -28,8 +26,6 @@ def test_create_user_successful(client: TestClient, db: Session): # Added db: Se
     assert isinstance(response_data["id"], int)
     assert response_data["email"] == user_data.email
     assert response_data["full_name"] == user_data.full_name
-    assert response_data["is_active"] == user_data.is_active
-    assert response_data["is_superuser"] == user_data.is_superuser
 
     # Direct DB verification using the db fixture
     created_user_in_db = db.query(UserModel).filter(UserModel.email == user_data.email).first()
@@ -38,8 +34,6 @@ def test_create_user_successful(client: TestClient, db: Session): # Added db: Se
     assert created_user_in_db is not None
     assert created_user_in_db.email == user_data.email
     assert created_user_in_db.full_name == user_data.full_name
-    assert created_user_in_db.is_active == user_data.is_active
-    assert created_user_in_db.is_superuser == user_data.is_superuser
 
     # Verify the password was hashed correctly
     assert verify_password(user_data.password, created_user_in_db.hashed_password)
